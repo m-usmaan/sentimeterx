@@ -1,0 +1,10 @@
+const COLORS = {
+  SKY_BLUE: "#E2EFFB",
+  SKY_BLUE_DARK: "#B1D9FF",
+  SKY_BLUE_DARKER: "#30699A",
+  DARK_BLUE: "#003B6D",
+  GRAY: "#4C4C4C",
+  WHITE: "#FFFFFF"
+}
+
+export default COLORS;
