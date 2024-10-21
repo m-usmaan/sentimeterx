@@ -1,62 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { WelcomeMessage, Note } from './styles';
-
-const SuggestionsContainer = styled.div`
-  ${'' /* background-color: orange; */}
-`;
-
-const SuggestionRow = styled.div`
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-`;
-
-const SuggestionCard = styled.div`
-  border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.25);
-  flex-grow: 1;
-  width: 100%;
-  padding: 27px 29px;
-  display: flex;
-  @media (max-width: 991px) {
-    max-width: 100%;
-    margin-top: 18px;
-    padding: 20px;
-  }
-`;
-
-const SuggestionIcon = styled.img`
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: 67px;
-  @media (max-width: 991px) {
-    margin-top: 0;
-  }
-`;
-
-const SuggestionContent = styled.div`
-  display: flex;
-  margin-left: 20px;
-  flex-grow: 1;
-  flex-direction: column;
-  font-weight: 500;
-`;
-
-const SuggestionTitle = styled.h3`
-  font-size: 17px;
-  line-height: 29px;
-  margin: 0;
-`;
-
-const SuggestionText = styled.p`
-  color: #4c4c4c;
-  font-size: 19px;
-  line-height: 28px;
-  margin: 9px 0 0;
-`;
+import { SuggestionsContainer, WelcomeContainer, SuggestionsCards, SuggestionCard, SuggestionIcon, SuggestionContent, SuggestionTitle, SuggestionText, Note } from './styles';
 
 const suggestions = [
   {
@@ -100,26 +43,26 @@ const suggestions = [
 function ChatSuggestions() {
   return (
     <SuggestionsContainer>
-      <WelcomeMessage>How can I help you today?</WelcomeMessage>
-      {[0, 1, 2].map((rowIndex) => (
-        <SuggestionRow key={rowIndex}>
-          {suggestions.slice(rowIndex * 2, rowIndex * 2 + 2).map((suggestion, index) => (
-            <SuggestionCard key={index}>
-              <SuggestionIcon loading="lazy" src={suggestion.icon} alt={suggestion.title} />
-              <SuggestionContent>
-                <SuggestionTitle style={{ color: suggestion.color }}>{suggestion.title}</SuggestionTitle>
-                <SuggestionText>{suggestion.text}</SuggestionText>
-              </SuggestionContent>
-            </SuggestionCard>
-          ))}
-        </SuggestionRow>
-      ))}
+      <WelcomeContainer>
+        <h1>Hello, Usman</h1>
+        <h2>How can I help you today?</h2>
+      </WelcomeContainer>
+      <SuggestionsCards>
+        {[0, 1, 2].map((rowIndex) => (
+            suggestions.slice(rowIndex * 2, rowIndex * 2 + 2).map((suggestion, index) => (
+              <SuggestionCard key={index}>
+                <SuggestionIcon loading="lazy" src={suggestion.icon} alt={suggestion.title} />
+                <SuggestionContent>
+                  <SuggestionTitle style={{ color: suggestion.color }}>{suggestion.title}</SuggestionTitle>
+                  <SuggestionText>{suggestion.text}</SuggestionText>
+                </SuggestionContent>
+              </SuggestionCard>
+            ))
+        ))}
+      </SuggestionsCards>
       <Note>
-        <strong>Note:</strong> Try to ask about specific themes and dimensions. Eg. "What people were saying about [Updates] in [September]". You can also refer to the{' '}
-        <span style={{ fontWeight: 600, textDecoration: 'underline', color: '#62a5e5' }}>
-          Example question
-        </span>{' '}
-        for guidance.
+        <strong>Note:</strong> Try to ask about specific themes and dimensions. Eg. "What people were saying about [Updates] in [September]". 
+        You can also refer to the{' '}<a href='/' target='blank'>Example question</a>{' '}for guidance.
       </Note>
     </SuggestionsContainer>
   );
