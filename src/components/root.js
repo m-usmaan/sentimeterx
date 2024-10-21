@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet } from "react-router-dom";
 
 import { MainContentContainer, OutletContainer } from './styles';
-import Sidebar from 'components/common/sidebar/Sidebar';
-import Header from 'components/common/header/Header';
+import Sidebar from 'components/common/Sidebar';
+import Header from 'components/common/Header';
 
 
 function MainContent() {

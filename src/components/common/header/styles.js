@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import COLORS from 'components/constants/colors';
+import COLORS from 'constants/colors';
 
 export const HeaderContainer = styled.header`
   grid-row: 1;       /* Place it in the first row */
@@ -8,11 +8,9 @@ export const HeaderContainer = styled.header`
   background-color: ${COLORS.DARK_BLUE};
   display: grid;
   grid-template-columns: 15% 65% 20%; /* Set widths for each child */
-  font-family: Poppins, sans-serif;
   color: ${COLORS.WHITE};
   justify-content: space-between;
   padding: 15px 0;
-  font-family: "Poppins", sans-serif;
 `;
 
 export const Logo = styled.div`
@@ -38,7 +36,6 @@ export const NavItem = styled.a`
   gap: 4px;
   color: inherit;
   text-decoration: none;
-  font-family: inherit;
 
   svg {
     margin: auto 0;
@@ -70,7 +67,6 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.span`
-  font-family: inherit;
 `;
 
 export const UserAvatar = styled.div`

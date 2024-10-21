@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import COLORS from 'components/constants/colors';
+import COLORS from 'constants/colors';
 
 export const SidebarContainer = styled.aside`
   grid-row: 1 / 3;   /* Span both rows (header and content) to take full height */
@@ -32,7 +32,6 @@ export const NewChatButton = styled.button`
   line-height: 18px;
   font-weight: 600;
   font-style: normal;
-  font-family: "Poppins", sans-serif;
 
   svg {
     height: 18px;
@@ -51,7 +50,6 @@ export const MenuContainer = styled.nav`
   flex-direction: column;
   color: ${COLORS.GRAY};
   line-height: 28px;
-  font-family: "Poppins", sans-serif;
   font-weight: 600;
   row-gap: 10px;
 

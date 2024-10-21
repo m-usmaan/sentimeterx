@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import COLORS from '../constants/colors';
+
 
 export const MainContentContainer = styled.div`
   display: grid;
@@ -11,5 +13,6 @@ export const MainContentContainer = styled.div`
 export const OutletContainer = styled.div`
   grid-row: 2;       /* Place it in the second row */
   grid-column: 2;    /* Place it in the second column */
-  background-color: #e0e0e0;
+  background-color: ${COLORS.WHITE};
+  padding: 2%;
 `;

@@ -1,12 +1,13 @@
 import { ALL_CONVERSATIONS_URL, HOME_URL, PINNED_CONVERSATIONS_URL } from "./urls";
 import { ChatIcon, DiscoverIcon, PinIcon } from 'assets/SVGs';
+import NewChat from "components/chatbot/NewChat";
 
 const ROUTES = [
   {
     path: HOME_URL,
     Icon: DiscoverIcon,
     text: 'Discover Chats',
-    element: <div>Chat with me</div>
+    element: <NewChat />
   },
   {
     path: ALL_CONVERSATIONS_URL,

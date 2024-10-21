@@ -2,8 +2,8 @@ import React from 'react';
 
 import { SidebarContainer, TopContainer, LogoImage, NewChatButton, Divider, MenuContainer, MenuItem } from './styles';
 import HamburgerIcon from "assets/icons/hamburger.svg"
-import { default as Link } from 'components/common/nav-link/IsActiveNavLink';
-import ROUTES from 'components/constants/routes';
+import { default as Link } from 'components/common/IsActiveNavLink';
+import ROUTES from 'constants/routes';
 import {AddIcon } from 'assets/SVGs';
 
 function Sidebar() {

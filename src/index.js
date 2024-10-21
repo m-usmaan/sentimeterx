@@ -9,9 +9,9 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ErrorPage from 'components/common/error-page/ErrorPage';
-import ROUTES from 'components/constants/routes';
-import { HOME_URL } from 'components/constants/urls';
+import ErrorPage from 'components/common/ErrorPage';
+import ROUTES from 'constants/routes';
+import { HOME_URL } from 'constants/urls';
 
 
 const router = createBrowserRouter([
