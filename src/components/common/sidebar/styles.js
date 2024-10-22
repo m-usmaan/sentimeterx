@@ -68,4 +68,9 @@ export const MenuItem = styled.div`
   display: flex;
   gap: 13px;
   padding: 8px 23px;
+
+  svg {
+    height: 28px;
+    width: 28px;
+  }
 `;

@@ -1,6 +1,7 @@
 import { ALL_CONVERSATIONS_URL, HOME_URL, PINNED_CONVERSATIONS_URL } from "./urls";
 import { ChatIcon, DiscoverIcon, PinIcon } from 'assets/SVGs';
 import NewChat from "components/chatbot/NewChat";
+import AllChats from "components/chatbot/AllChats";
 
 const ROUTES = [
   {
@@ -13,7 +14,7 @@ const ROUTES = [
     path: ALL_CONVERSATIONS_URL,
     Icon: ChatIcon,
     text: 'All Conversations',
-    element: <div>All Conversations</div>
+    element: <AllChats />
   },
   {
     path: PINNED_CONVERSATIONS_URL,

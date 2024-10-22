@@ -48,7 +48,6 @@ export const DatasetDropdownContainer = styled.fieldset`
   position: absolute;
   z-index: 1;
   bottom: 2.4rem;
-  padding: 0;
   border-radius: 9px;
   border: none;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -73,10 +72,7 @@ export const DropdownContainer = styled.div`
   overflow-y: auto;
 `;
 
-export const Dropdown = styled.ul`
-  padding: 0;
-  margin: 0;
-`;
+export const Dropdown = styled.ul``;
 
 export const DropdownItem = styled.div`
   &:not(:last-child) {
@@ -140,7 +136,9 @@ export const DropdownItem = styled.div`
 `;
 
 export const ClearButtonContainer = styled.div`
-  margin: 2% auto;
+  margin: 3% auto;
+  display: flex;
+  justify-content: center;
 
   button {
     font-weight: bold;
