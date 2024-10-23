@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { AllChatsContainer, ChatsList, ChatsListContainer, FiltersContainer, ListItem } from "./styles";
 import { PinIcon, RightAngleIcon } from "assets/SVGs";
 import COLORS from "constants/colors";
+import { default as Link } from 'components/common/IsActiveNavLink';
 
 
 const AllChats = () => {
@@ -191,13 +192,15 @@ const AllChats = () => {
           {
             chats.map((obj) => {
               return (
-                <ListItem key={obj.id}>
-                  <input type="checkbox" value={obj.id}></input>
-                  <PinIcon {...(obj.isPinned && pinnedIconOptions)} />
-                  <RightAngleIcon />
-                  <p>{obj.title}</p>
-                  <span>{obj.date.toLocaleDateString('en-US', dateOptions)}</span>
-                </ListItem>
+                <Link to={`/chats/${obj.id}`} key={obj.id}>
+                  <ListItem key={obj.id}>
+                    <input type="checkbox" value={obj.id}></input>
+                    <PinIcon {...(obj.isPinned && pinnedIconOptions)} />
+                    <RightAngleIcon />
+                    <p>{obj.title}</p>
+                    <span>{obj.date.toLocaleDateString('en-US', dateOptions)}</span>
+                  </ListItem>
+                </Link>
               );
             })
           }

@@ -22,6 +22,10 @@ export const ChatsListContainer = styled.div`
 
 export const ChatsList = styled.ul`
   list-style-type: none;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const ListItem = styled.li`
@@ -34,6 +38,7 @@ export const ListItem = styled.li`
   align-items: center;
   cursor: pointer;
   transition: 0.5s ease;
+  margin-bottom: 4px;
 
   input[type='checkbox'] {
     cursor: pointer;
@@ -48,10 +53,6 @@ export const ListItem = styled.li`
   p, span {
     font-size: 14px;
     color: ${COLORS.GRAY};
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 4px;
   }
 
   &:hover {
