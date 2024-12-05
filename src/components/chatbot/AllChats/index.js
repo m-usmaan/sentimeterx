@@ -1,4 +1,4 @@
-import { DatePicker } from "antd";
+import { DatePicker, Input } from "antd";
 import dayjs from "dayjs";
 import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -18,7 +18,9 @@ import COLORS from "constants/colors";
 import { convertDateTime } from "utils";
 
 const AllChats = ({ pinned }) => {
-  const [data, setData] = useState({});
+  const { Search } = Input;
+  const [searchString, setSearchString] = useState("");
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const dateOptions = { year: "numeric", month: "short", day: "numeric" };
   const pinnedIconOptions = {
@@ -41,13 +43,16 @@ const AllChats = ({ pinned }) => {
     },
   ];
 
-  const fetchData = useCallback(async (pageNumber = 1) => {
-    let params = { page: pageNumber };
-    if (pinned !== undefined) params["pinned"] = pinned;
-    const response = await allChats(params);
-    return response;
-    /* eslint-disable-next-line */
-  }, [pinned]); // TODO: Add page in dependency array
+  const fetchData = useCallback(
+    async (pageNumber = 1) => {
+      let params = { page: pageNumber };
+      if (pinned !== undefined) params["pinned"] = pinned;
+      const response = await allChats(params);
+      return response;
+      /* eslint-disable-next-line */
+    },
+    [pinned]
+  ); // TODO: Add page in dependency array
 
   const populateData = () => {
     setLoading(true);
@@ -63,6 +68,11 @@ const AllChats = ({ pinned }) => {
       });
   };
 
+  const onSearch = (value, _e, info) => setSearchString(value.toLowerCase());
+  const filteredList = data.filter((obj) =>
+    obj.user_query.toLowerCase().includes(searchString)
+  );
+
   useEffect(() => {
     populateData();
     /* eslint-disable-next-line */
@@ -73,6 +83,12 @@ const AllChats = ({ pinned }) => {
   ) : (
     <AllChatsContainer>
       <FiltersContainer>
+        <Search
+          placeholder="Search..."
+          allowClear
+          onSearch={onSearch}
+          style={{ width: 400 }}
+        />
         <RangePicker
           placeholder={["From", "To"]}
           variant="filled"
@@ -83,7 +99,7 @@ const AllChats = ({ pinned }) => {
       </FiltersContainer>
       <ChatsListContainer>
         <ChatsList>
-          {data.map((obj) => {
+          {filteredList.map((obj) => {
             return (
               <Link to={`/chats/${obj.unique_uuid}`} key={obj.unique_uuid}>
                 <ListItem key={obj.unique_uuid}>

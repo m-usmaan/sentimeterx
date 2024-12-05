@@ -10,7 +10,7 @@ export const AllChatsContainer = styled.section`
 
 export const FiltersContainer = styled.div`
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding: 1%;
 `;
 
