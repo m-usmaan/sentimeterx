@@ -1,3 +1,4 @@
 export const HOME_URL = "/";
-export const ALL_CONVERSATIONS_URL = "/chats/all";
-export const PINNED_CONVERSATIONS_URL = "/chats/pinned";
+export const ALL_CHATS_URL = "/chats/all";
+export const CHAT_DETAIL_URL = "/chats/:unique_uuid";
+export const PINNED_CHATS_URL = "/chats/pinned";

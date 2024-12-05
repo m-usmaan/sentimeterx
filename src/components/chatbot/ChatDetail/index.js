@@ -1,108 +1,169 @@
-import React from "react";
-import { Menu } from 'antd';
-import { MailOutlined, PieChartOutlined, EyeOutlined, FileDoneOutlined, WechatWorkOutlined } from '@ant-design/icons';
+import {
+  MailOutlined,
+  PieChartOutlined,
+  EyeOutlined,
+  FileDoneOutlined,
+  QuestionCircleOutlined,
+  WechatWorkOutlined,
+} from "@ant-design/icons";
+import { Menu, Popconfirm } from "antd";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { ActionIconsContainer, ChatNavigationContainer, NavigationHeaderContainer, ChatDetailContainer, ChatDetailContentContainer, ChatDetailHeaderContainer, ChatDetailSidebarContainer } from "./styles";
-import { UserIcon } from "assets/SVGs";
+import {
+  ActionIconsContainer,
+  NavigationHeaderContainer,
+  ChatDetailContainer,
+  ChatDetailContentContainer,
+  ChatDetailHeaderContainer,
+  ChatDetailSidebarContainer,
+} from "./styles";
+import { UserIcon, PinIcon } from "assets/SVGs";
 import { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow_left.svg";
-import { ReactComponent as PinIcon } from "assets/icons/pin.svg";
 import { ReactComponent as TrashIcon } from "assets/icons/trash.svg";
 import { ReactComponent as ForwardIcon } from "assets/icons/forward.svg";
 import { ReactComponent as DownloadIcon } from "assets/icons/download.svg";
 import { ReactComponent as SIcon } from "assets/icons/s.svg";
-import { RightAngleIcon, LeftAngleIcon } from "assets/SVGs";
-
+import { deleteChat, fetchChat, pinChat } from "components/chatbot/apis";
+import Loader from "components/common/Loader";
+import COLORS from "constants/colors";
+import { convertDateTime } from "utils";
+import { ALL_CHATS_URL } from "constants/urls";
 
 const ChatDetail = () => {
-  const getDateTime = (date) => {
+  const { unique_uuid } = useParams();
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-    const timeAgo = (date) => {
-      const now = new Date();
-      const diffInMs = now - date;
-      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));  // Convert milliseconds to days
-      if (diffInDays === 0) return '(today)';
-      else if (diffInDays === 1) return '(yesterday)';
-      else return `(${diffInDays} days ago)`;
-    }
-    const formatDateTime = (date) => {
-      const options = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-      };
-      return new Intl.DateTimeFormat('en-US', options).format(date);
-    }
-    const formattedDate = formatDateTime(date);
-    const agoText = timeAgo(date);
-    return `${formattedDate} ${agoText}`;
+  const pinnedIconOptions = {
+    borderColor: COLORS.DARK_BLUE,
+    fillColor: COLORS.DARK_BLUE,
   };
-  const items = [
+  const dateOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+  const navItems = [
     {
-      key: 'grp',
-      type: 'group',
+      key: "grp",
+      type: "group",
       children: [
         {
-          key: 'summary',
-          label: 'Summary',
+          key: "summary",
+          label: "Summary",
           icon: <MailOutlined />,
         },
         {
-          key: 'analysis',
-          label: 'Detailed Analysis',
+          key: "analysis",
+          label: "Detailed Analysis",
           icon: <PieChartOutlined />,
         },
         {
-          key: 'visualization',
-          label: 'Add a Visualization',
+          key: "visualization",
+          label: "Add a Visualization",
           icon: <EyeOutlined />,
         },
         {
-          key: 'quotes',
-          label: 'Feedback Quotes',
-          icon: <WechatWorkOutlined />
+          key: "quotes",
+          label: "Feedback Quotes",
+          icon: <WechatWorkOutlined />,
         },
         {
-          key: 'action_plan',
-          label: 'Create Action Plan',
+          key: "action_plan",
+          label: "Create Action Plan",
           icon: <FileDoneOutlined />,
         },
       ],
     },
   ];
-  return (
+
+  const handlePinChat = async (e) => {
+    e.preventDefault();
+    await pinChat(unique_uuid).then((response) => {
+      setData((prevState) => ({
+        ...prevState,
+        is_pinned: response.data.is_pinned,
+      }));
+    });
+  };
+
+  const handleDeleteChat = async (e) => {
+    e.preventDefault();
+    await deleteChat(unique_uuid).then((response) => {
+      navigate(ALL_CHATS_URL);
+    }).catch((error) => {
+      toast.error(`${error.response.status}: ${error.response.statusText}`);
+    });
+  };
+
+  const populateData = async () => {
+    setLoading(true);
+    await fetchChat(unique_uuid)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        toast.error(`${error.response.status}: ${error.response.statusText}`);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    populateData();
+    /* eslint-disable-next-line */
+  }, []);
+
+  return loading ? (
+    <Loader />
+  ) : (
     <ChatDetailContainer>
       <NavigationHeaderContainer>
         <ActionIconsContainer>
-          <ArrowLeftIcon />
-          <PinIcon />
-          <TrashIcon />
+          {window.history.state.idx > 0 && (
+            <span onClick={() => navigate(-1)}>
+              <ArrowLeftIcon />
+            </span>
+          )}
+          <span onClick={handlePinChat}>
+            <PinIcon {...(data.is_pinned && pinnedIconOptions)} />
+          </span>
+          <Popconfirm
+            title="Delete Chat"
+            description="Are you sure to delete this chat?"
+            onConfirm={handleDeleteChat}
+            icon={
+              <QuestionCircleOutlined style={{color: "red",}} />
+            }
+          >
+            <TrashIcon />
+          </Popconfirm>
           <ForwardIcon />
           <DownloadIcon />
         </ActionIconsContainer>
-        <ChatNavigationContainer>
-          <p>17 of 50</p>
-          <LeftAngleIcon />
-          <RightAngleIcon />
-        </ChatNavigationContainer>
       </NavigationHeaderContainer>
       <ChatDetailHeaderContainer>
         <UserIcon />
-        <p>What do US Customer think about the new return policy?</p>
-        <span>{getDateTime(new Date(2024, 8, 29, 11, 40))}</span>
+        <p>{data["user_query"]}</p>
+        <span>{convertDateTime(data["created_at"], dateOptions, true)}</span>
       </ChatDetailHeaderContainer>
       <ChatDetailSidebarContainer>
         <Menu
           style={{
-            backgroundColor: '#F5F5F5',
-            border: 'none'
+            backgroundColor: "#F5F5F5",
+            border: "none",
           }}
-          defaultSelectedKeys={['summary']}
-          defaultOpenKeys={['grp']}
+          defaultSelectedKeys={["summary"]}
+          defaultOpenKeys={["grp"]}
           mode="inline"
-          items={items}
+          items={navItems}
         />
       </ChatDetailSidebarContainer>
       <ChatDetailContentContainer>

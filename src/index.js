@@ -10,6 +10,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ErrorPage from 'components/common/ErrorPage';
+import ToastProvider from 'components/common/Toast';
 import ROUTES from 'constants/routes';
 import { HOME_URL } from 'constants/urls';
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ToastProvider />
     <RouterProvider router={router} />
   </React.StrictMode>
 );

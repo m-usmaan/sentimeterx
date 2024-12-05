@@ -85,7 +85,7 @@ const AllChats = () => {
               <Link to={`/chats/${obj.unique_uuid}`} key={obj.unique_uuid}>
                 <ListItem key={obj.unique_uuid}>
                   <input type="checkbox" value={obj.unique_uuid}></input>
-                  <PinIcon {...(obj.is_pinned && pinnedIconOptions)} />
+                  <PinIcon {...(obj.is_pinned && pinnedIconOptions)} />  {/* TODO: Add onclick event here */}
                   <RightAngleIcon />
                   <p>{obj.user_query}</p>
                   <span>{convertDateTime(obj.created_at, dateOptions)}</span>

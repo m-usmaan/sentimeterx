@@ -31,6 +31,9 @@ export const ActionIconsContainer = styled.div`
     width: 13px;
     cursor: pointer;
   }
+  span {
+    display: inline-flex;
+  }
 `;
 
 export const ChatNavigationContainer = styled.div`
