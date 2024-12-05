@@ -1,0 +1,1 @@
+export const ALL_CHATS_API_URL = (page = 1) => `/chats/?page=${page}`;
