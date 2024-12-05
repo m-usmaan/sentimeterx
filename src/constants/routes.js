@@ -27,7 +27,7 @@ const ROUTES = [
     path: PINNED_CHATS_URL,
     Icon: PinIcon,
     text: 'Pin Conversations',
-    element: <div>Pin Conversations</div>
+    element: <AllChats pinned={true} />
   }
 ];
 

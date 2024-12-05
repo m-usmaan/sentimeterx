@@ -17,7 +17,7 @@ import Loader from "components/common/Loader";
 import COLORS from "constants/colors";
 import { convertDateTime } from "utils";
 
-const AllChats = () => {
+const AllChats = ({ pinned }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const dateOptions = { year: "numeric", month: "short", day: "numeric" };
@@ -42,9 +42,12 @@ const AllChats = () => {
   ];
 
   const fetchData = useCallback(async (pageNumber = 1) => {
-    const response = await allChats(pageNumber);
+    let params = { page: pageNumber };
+    if (pinned !== undefined) params["pinned"] = pinned;
+    const response = await allChats(params);
     return response;
-  }, []);  // TODO: Add page in dependency array
+    /* eslint-disable-next-line */
+  }, [pinned]); // TODO: Add page in dependency array
 
   const populateData = () => {
     setLoading(true);
@@ -63,7 +66,7 @@ const AllChats = () => {
   useEffect(() => {
     populateData();
     /* eslint-disable-next-line */
-  }, []);  // TODO: Add page in dependency array
+  }, [pinned]); // TODO: Add page in dependency array
 
   return loading ? (
     <Loader />

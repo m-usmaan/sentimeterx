@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { EXTRACT_ORGANIZATION_SLUG } from ".";
+import { buildQueryString } from "utils";
 
 const axiosClient = axios.create();
 
@@ -22,8 +23,12 @@ axiosClient.interceptors.request.use((request) => {
   return request;
 });
 
-export function getRequest(url, options = {}) {
-  return axiosClient.get(`${url}`, options).then((response) => response);
+export function getRequest(url, queryParams = {}, options = {}) {
+  let params = buildQueryString(queryParams);
+  if (params) params = `?${params}`;
+  return axiosClient
+    .get(`${url}${params}`, options)
+    .then((response) => response);
 }
 
 export function postRequest(url, payload, options = {}) {

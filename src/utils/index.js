@@ -36,3 +36,14 @@ export const convertDateTime = (dateObject, dateOptions, ago = false) => {
   }
   return formattedDate;
 };
+
+export const buildQueryString = (params) => {
+  const pairs = [];
+  for (const key in params) {
+    const value = params[key];
+    const encodedKey = encodeURIComponent(key);
+    const encodedValue = encodeURIComponent(value);
+    pairs.push(`${encodedKey}=${encodedValue}`);
+  }
+  return pairs.join("&");
+};
