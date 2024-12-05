@@ -9,25 +9,29 @@ const ROUTES = [
     path: HOME_URL,
     Icon: DiscoverIcon,
     text: 'Discover Chats',
-    element: <NewChat />
+    element: <NewChat />,
+    index: true
   },
   {
     path: ALL_CHATS_URL,
     Icon: ChatIcon,
     text: 'All Conversations',
-    element: <AllChats />
+    element: <AllChats />,
+    index: true
   },
   {
     path: CHAT_DETAIL_URL,
     Icon: ChatIcon,
     text: 'Chat',
-    element: <ChatDetail />
+    element: <ChatDetail />,
+    index: false
   },
   {
     path: PINNED_CHATS_URL,
     Icon: PinIcon,
     text: 'Pin Conversations',
-    element: <AllChats pinned={true} />
+    element: <AllChats pinned={true} />,
+    index: true
   }
 ];
 

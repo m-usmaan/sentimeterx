@@ -1,10 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { SidebarContainer, TopContainer, LogoImage, NewChatButton, Divider, MenuContainer, MenuItem } from './styles';
-import HamburgerIcon from "assets/icons/hamburger.svg"
-import { default as Link } from 'components/common/IsActiveNavLink';
-import ROUTES from 'constants/routes';
-import {AddIcon } from 'assets/SVGs';
+import {
+  SidebarContainer,
+  TopContainer,
+  LogoImage,
+  NewChatButton,
+  Divider,
+  MenuContainer,
+  MenuItem,
+} from "./styles";
+import HamburgerIcon from "assets/icons/hamburger.svg";
+import { default as Link } from "components/common/IsActiveNavLink";
+import ROUTES from "constants/routes";
+import { AddIcon } from "assets/SVGs";
 
 function Sidebar() {
   return (
@@ -19,9 +27,9 @@ function Sidebar() {
       <Divider />
       <MenuContainer>
         {
-          ROUTES.map(({ Icon, path, text}) => {
+          ROUTES.filter((route) => route.index).map(({ Icon, path, text }) => {
             return (
-                <Link to={path} key={path}>
+              <Link to={path} key={path}>
                 <MenuItem>
                   <Icon />
                   <span>{text}</span>
