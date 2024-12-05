@@ -6,7 +6,7 @@ import {
   QuestionCircleOutlined,
   WechatWorkOutlined,
 } from "@ant-design/icons";
-import { Menu, Popconfirm } from "antd";
+import { Empty, Menu, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -33,7 +33,7 @@ import { ALL_CHATS_URL } from "constants/urls";
 
 const ChatDetail = () => {
   const { unique_uuid } = useParams();
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -124,6 +124,7 @@ const ChatDetail = () => {
   return loading ? (
     <Loader />
   ) : (
+    !data ? <Empty /> :
     <ChatDetailContainer>
       <NavigationHeaderContainer>
         <ActionIconsContainer>
