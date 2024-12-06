@@ -55,3 +55,7 @@ export const isUserLoggedIn = () => {
 export const storeToken = (token) => {
   localStorage.setItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`, token);
 }
+
+export const logoutUser = () => {
+  localStorage.removeItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`);
+}

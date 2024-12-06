@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   grid-column: 2;    /* Place it in the second column */
   background-color: ${COLORS.DARK_BLUE};
   display: grid;
-  grid-template-columns: 15% 65% 20%; /* Set widths for each child */
+  grid-template-columns: 15% 50% 30%; /* Set widths for each child */
   color: ${COLORS.WHITE};
   justify-content: space-between;
   padding: 15px 0;
@@ -62,8 +62,13 @@ export const UserInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
-  gap: 10px;
+  gap: 20px;
   padding-right: 20px;
+
+  p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
 
 export const UserName = styled.span`

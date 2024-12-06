@@ -4,6 +4,7 @@ const IsActiveNavLink = ({to, ...props}) => {
   let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: true });
 
+  // TODO: Mark active links when chat detail opened
   return <Link to={to} {...props} className={match ? 'active': ''} />;
 }
 

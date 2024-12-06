@@ -140,6 +140,8 @@ const ChatDetail = () => {
             title="Delete Chat"
             description="Are you sure to delete this chat?"
             onConfirm={handleDeleteChat}
+            okText="Yes"
+            okType="danger"
             icon={
               <QuestionCircleOutlined style={{color: "red",}} />
             }
