@@ -22,6 +22,7 @@ axiosClient.interceptors.request.use((request) => {
   }
   return request;
 });
+// TODO: Check if response is 401 on any request, then unauth user from app and navigate to login (Response interceptor)
 
 export function getRequest(url, queryParams = {}, options = {}) {
   let params = buildQueryString(queryParams);

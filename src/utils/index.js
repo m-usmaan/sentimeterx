@@ -47,3 +47,11 @@ export const buildQueryString = (params) => {
   }
   return pairs.join("&");
 };
+
+export const isUserLoggedIn = () => {
+  return localStorage.getItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`) !== null;
+}
+
+export const storeToken = (token) => {
+  localStorage.setItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`, token);
+}
