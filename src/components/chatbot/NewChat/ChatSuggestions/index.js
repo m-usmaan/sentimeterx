@@ -1,6 +1,7 @@
 import React from "react";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import {
   SuggestionsContainer,
@@ -52,15 +53,16 @@ const suggestions = [
     text: "Compare this month to last month.",
     color: "#909090",
   },
-];
+]; // TODO: Fetch suggestions from backend
 
 function ChatSuggestions() {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
 
   const handleCreate = async (user_query) => {
     await createChat({ user_query })
       .then((response) => {
-        navigate(`/chats/${response.data.unique_uuid}`)
+        navigate(`/chats/${response.data.unique_uuid}`);
       })
       .catch((error) =>
         toast.error(`${error.response.status}: ${error.response.statusText}`)
@@ -69,7 +71,7 @@ function ChatSuggestions() {
   return (
     <SuggestionsContainer>
       <WelcomeContainer>
-        <h1>Hello, Usman</h1>
+        <h1>Hello, {user.last_name}</h1>
         <h2>How can I help you today?</h2>
       </WelcomeContainer>
       <SuggestionsCards>

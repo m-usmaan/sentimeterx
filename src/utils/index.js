@@ -48,14 +48,14 @@ export const buildQueryString = (params) => {
   return pairs.join("&");
 };
 
-export const isUserLoggedIn = () => {
-  return localStorage.getItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`) !== null;
+export const getToken = () => {
+  return localStorage.getItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`);
 }
 
-export const storeToken = (token) => {
+export const setToken = (token) => {
   localStorage.setItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`, token);
 }
 
-export const logoutUser = () => {
+export const removeToken = () => {
   localStorage.removeItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`);
 }

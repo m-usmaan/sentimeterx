@@ -1,6 +1,7 @@
 import { WarningOutlined } from "@ant-design/icons";
-import React from "react";
 import { Popconfirm } from "antd";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   HeaderContainer,
@@ -12,12 +13,16 @@ import {
   UserAvatar,
 } from "./styles";
 import { SentimeterIcon, ArrowDownIcon, AvatarIcon } from "assets/SVGs";
-import { logoutUser } from "utils";
+import { logout } from "features/users/userSlice";
+import { removeToken } from "utils";
 
 function Header() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+
   const handleLogout = () => {
-    logoutUser();
-    window.location.reload();
+    removeToken();
+    dispatch(logout());
   };
   return (
     <HeaderContainer>
@@ -44,9 +49,9 @@ function Header() {
         >
           <p>Logout</p>
         </Popconfirm>
-        <UserName>Muhammad Usman</UserName>
+        <UserName>{user.full_name}</UserName>
         <UserAvatar>
-          <AvatarIcon />
+          <AvatarIcon />  {/* TODO: Render user avatar */}
         </UserAvatar>
       </UserInfo>
     </HeaderContainer>

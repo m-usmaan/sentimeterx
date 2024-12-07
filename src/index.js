@@ -1,35 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 
-
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import ErrorPage from 'components/common/ErrorPage';
-import ToastProvider from 'components/common/Toast';
-import ROUTES from 'constants/routes';
-import { HOME_URL } from 'constants/urls';
-
+import App from "./App";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import store, { persistor } from "./store";
+import ErrorPage from "components/common/ErrorPage";
+import ToastProvider from "components/common/Toast";
+import Login from "components/Login";
+import { HOME_URL } from "constants/urls";
+import ROUTES from "constants/routes";
 
 const router = createBrowserRouter([
   {
     path: HOME_URL,
     element: <App />,
     errorElement: <ErrorPage />,
-    children: ROUTES.map(
-      ({ path, element }) => ({path, element})
-    )
+    children: ROUTES.map(({ path, element }) => ({ path, element })),
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ToastProvider />
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ToastProvider />
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 
