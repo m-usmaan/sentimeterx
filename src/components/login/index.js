@@ -11,14 +11,14 @@ import { toast } from "react-toastify";
 import { getToken, removeToken, setToken } from "utils";
 
 const Login = () => {
-  removeToken();
-
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   if (isLoggedIn && getToken()) {
     return <Navigate to={HOME_URL} replace />;
+  } else {
+    removeToken();
   }
 
   const handleSubmit = (values) => {
