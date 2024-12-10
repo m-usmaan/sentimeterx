@@ -4,16 +4,15 @@ import styled from "styled-components";
 export const ChatDetailContainer = styled.div`
   border-radius: 10px;
   display: grid;
-  grid-template-areas: 
-    'nav nav'
-    'header header'
-    'sidebar main';
+  grid-template-areas:
+    "nav nav"
+    "header header"
+    "main main";
   grid-template-rows: auto auto 1fr;
-  grid-template-columns: 20% 1fr;
 `;
 
 export const NavigationHeaderContainer = styled.header`
-  background-color: #E2EFFB;
+  background-color: #e2effb;
   grid-area: nav;
   margin-bottom: 2px;
   border-radius: 10px 10px 0 0;
@@ -45,7 +44,7 @@ export const ChatNavigationContainer = styled.div`
 
   p {
     font-size: 12px;
-    color: ${COLORS.GRAY}
+    color: ${COLORS.GRAY};
   }
   svg {
     height: 13px;
@@ -56,31 +55,22 @@ export const ChatNavigationContainer = styled.div`
 
 export const ChatDetailHeaderContainer = styled.div`
   grid-area: header;
-  border-bottom: 2px solid #ECE9E9;
+  border-bottom: 2px solid #ece9e9;
   display: grid;
   grid-template-columns: auto 1fr auto;
   padding: 1.5% 2.5%;
   align-items: center;
   gap: 2%;
   color: ${COLORS.GRAY};
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 
   span {
     font-size: 11px;
   }
 `;
 
-export const ChatDetailSidebarContainer = styled.nav`
-  grid-area: sidebar;
-  border-right: 2px solid #ECE9E9;
-  padding: 5%;
-  background-color: #F5F5F5;
-  border-radius: 0 0 0 10px;
-`;
-
 export const ChatDetailContentContainer = styled.aside`
   grid-area: main;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 0 0 10px 0;
-  padding: 2%;
 `;
