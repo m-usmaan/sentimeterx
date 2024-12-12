@@ -184,6 +184,7 @@ const ChatDetail = () => {
           <Content
             style={{
               padding: "2%",
+              maxWidth: "70%",
               maxHeight: "65vh",
               overflow: "auto"
             }}
