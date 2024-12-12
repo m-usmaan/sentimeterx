@@ -77,7 +77,7 @@ const ChatDetail = () => {
         },
         {
           key: "visualization",
-          label: "Add a Visualization",
+          label: "Visualization",
           icon: <EyeOutlined />,
         },
         {
@@ -166,7 +166,7 @@ const ChatDetail = () => {
       </ChatDetailHeaderContainer>
       <ChatDetailContentContainer>
         <Layout>
-          <Sider width={300}>
+          <Sider width={300} style={{backgroundColor: "transparent"}}>
             <Menu
               style={{
                 backgroundColor: "#F5F5F5",
@@ -184,6 +184,8 @@ const ChatDetail = () => {
           <Content
             style={{
               padding: "2%",
+              maxHeight: "65vh",
+              overflow: "auto"
             }}
           >
             <ActiveRack data={data[rack]} unique_uuid={unique_uuid} />

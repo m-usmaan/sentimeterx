@@ -9,6 +9,7 @@ export const ChatDetailContainer = styled.div`
     "header header"
     "main main";
   grid-template-rows: auto auto 1fr;
+  height: 100%;
 `;
 
 export const NavigationHeaderContainer = styled.header`
@@ -32,24 +33,6 @@ export const ActionIconsContainer = styled.div`
   }
   span {
     display: inline-flex;
-  }
-`;
-
-export const ChatNavigationContainer = styled.div`
-  display: flex;
-  width: 15%;
-  gap: 10%;
-  align-items: center;
-  justify-content: end;
-
-  p {
-    font-size: 12px;
-    color: ${COLORS.GRAY};
-  }
-  svg {
-    height: 13px;
-    width: 13px;
-    cursor: pointer;
   }
 `;
 
