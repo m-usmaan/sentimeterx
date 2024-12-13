@@ -127,7 +127,7 @@ const ChatDetail = () => {
   useEffect(() => {
     populateData();
     /* eslint-disable-next-line */
-  }, []);
+  }, [unique_uuid]);
 
   return loading ? (
     <Loader />
