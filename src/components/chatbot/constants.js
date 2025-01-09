@@ -1,6 +1,7 @@
 export const ALL_CHATS_API_URL = "/chats/";
 export const CHAT_SUGGESTIONS_API_URL = "/chats/suggestions/";
 export const CREATE_CHAT_API_URL = "/chats/";
+export const DATASETS_API_URL = "/data-sets/";
 
 export const CHAT_ANALYSIS_API_URL = (unique_uuid) => `/chats/${unique_uuid}/detailed-analysis/`;
 export const CHAT_FEEDBACK_QUOTES_API_URL = (unique_uuid) => `/chats/${unique_uuid}/feedback-quotes/`;

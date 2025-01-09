@@ -8,12 +8,14 @@ import {
   CHAT_DETAIL_API_URL,
   CHAT_SUMMARY_API_URL,
   CHAT_VISUALIZATION_API_URL,
+  DATASETS_API_URL,
   PIN_CHAT_API_URL,
 } from "./constants";
 
 export const allChats = async (queryParams = {}) => getRequest(ALL_CHATS_API_URL, queryParams);
 export const chatSuggestions = async (queryParams = {}) => getRequest(CHAT_SUGGESTIONS_API_URL, queryParams);
 export const createChat = async (data) => postRequest(CREATE_CHAT_API_URL, data);
+export const dataSets = async (queryParams = {}) => getRequest(DATASETS_API_URL, queryParams);
 export const fetchChat = async (unique_uuid) => getRequest(CHAT_DETAIL_API_URL(unique_uuid));
 export const fetchChatAnalysis = async (unique_uuid) => getRequest(CHAT_ANALYSIS_API_URL(unique_uuid));
 export const fetchChatFeedbackQuotes = async (unique_uuid) => getRequest(CHAT_FEEDBACK_QUOTES_API_URL(unique_uuid));

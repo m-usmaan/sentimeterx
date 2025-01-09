@@ -52,7 +52,7 @@ export const DatasetDropdownContainer = styled.fieldset`
   border: none;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   background-color: ${COLORS.WHITE};
-  width: 100%;
+  width: 230%;
   display: ${(props) => props.display};
 `;
 
