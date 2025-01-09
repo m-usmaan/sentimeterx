@@ -1,6 +1,7 @@
 import { getRequest, deleteRequest, postRequest } from "utils/axiosClient";
 import {
   ALL_CHATS_API_URL,
+  CHAT_SUGGESTIONS_API_URL,
   CREATE_CHAT_API_URL,
   CHAT_ANALYSIS_API_URL,
   CHAT_FEEDBACK_QUOTES_API_URL,
@@ -11,6 +12,7 @@ import {
 } from "./constants";
 
 export const allChats = async (queryParams = {}) => getRequest(ALL_CHATS_API_URL, queryParams);
+export const chatSuggestions = async (queryParams = {}) => getRequest(CHAT_SUGGESTIONS_API_URL, queryParams);
 export const createChat = async (data) => postRequest(CREATE_CHAT_API_URL, data);
 export const fetchChat = async (unique_uuid) => getRequest(CHAT_DETAIL_API_URL(unique_uuid));
 export const fetchChatAnalysis = async (unique_uuid) => getRequest(CHAT_ANALYSIS_API_URL(unique_uuid));
