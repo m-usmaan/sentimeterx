@@ -2,6 +2,7 @@ import { WarningOutlined } from "@ant-design/icons";
 import { Popconfirm } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import {
   HeaderContainer,
@@ -15,15 +16,24 @@ import {
 import { SentimeterIcon, ArrowDownIcon, AvatarIcon } from "assets/SVGs";
 import { logout } from "features/users/userSlice";
 import { removeToken } from "utils";
+import { logoutUser } from "features/users/apis";
 
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
-  const handleLogout = () => {
-    removeToken();
-    dispatch(logout());
+  const handleLogout = async () => {
+    await logoutUser()
+      .then((response) => {
+        removeToken();
+        dispatch(logout());
+      })
+      .catch((error) => {
+        toast.error(`${error.response.status}: ${error.response.statusText}`);
+      })
+      .finally(() => {});
   };
+
   return (
     <HeaderContainer>
       <Logo>
@@ -51,7 +61,7 @@ function Header() {
         </Popconfirm>
         <UserName>{user.full_name}</UserName>
         <UserAvatar>
-          <AvatarIcon />  {/* TODO: Render user avatar */}
+          <AvatarIcon /> {/* TODO: Render user avatar */}
         </UserAvatar>
       </UserInfo>
     </HeaderContainer>
