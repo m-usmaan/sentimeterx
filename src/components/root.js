@@ -3,7 +3,7 @@ import React from "react";
 // import { Outlet } from "react-router-dom";
 
 // import { MainContentContainer, OutletContainer } from './styles';
-// import Sidebar from 'components/common/Sidebar';
+import Sidebar from 'components/common/Sidebar';
 // import Header from 'components/common/Header';
 
 const headerStyle = {
@@ -21,12 +21,6 @@ const contentStyle = {
   color: "#fff",
   backgroundColor: "#0958d9",
 };
-const siderStyle = {
-  textAlign: "center",
-  lineHeight: "120px",
-  color: "#fff",
-  backgroundColor: "pink",
-};
 const layoutStyle = {
   overflow: "hidden",
   width: "100%",
@@ -38,8 +32,8 @@ function MainContent() {
 
   return (
     <Layout style={layoutStyle}>
-      <Sider width="20%" style={siderStyle}>
-        Sider
+      <Sider width="20%">
+        <Sidebar />
       </Sider>
       <Layout>
         <Header style={headerStyle}>Header</Header>
