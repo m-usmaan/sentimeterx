@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 import { ChartContainer } from "./styles";
-import { ReactComponent as SIcon } from "assets/icons/s.svg";
 import { fetchChatVisualization } from "components/chatbot/apis";
 import {
   Chart as ChartJS,
@@ -186,11 +185,8 @@ const ChatVisualization = ({ data, unique_uuid }) => {
     <Empty />
   ) : (
     <ChartContainer>
-      <SIcon />
-      <div id="chart-container">
         <strong id="headline">{config.query}</strong>
         <canvas ref={chartRef} width="400" height="400"></canvas>
-      </div>
     </ChartContainer>
   );
 };

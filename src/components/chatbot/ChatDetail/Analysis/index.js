@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { AnalysisContainer } from "./styles";
-import { ReactComponent as SIcon } from "assets/icons/s.svg";
 import { fetchChatAnalysis } from "components/chatbot/apis";
 
 const ChatAnalysis = ({ data, unique_uuid }) => {
@@ -37,11 +36,8 @@ const ChatAnalysis = ({ data, unique_uuid }) => {
     <Empty />
   ) : (
     <AnalysisContainer>
-      <SIcon />
-      <div id="analysis-container">
-        <strong id="headline">{analysis.analysis.headline}</strong>
-        <p>{analysis.analysis.detail}</p>
-      </div>
+      <strong id="headline">{analysis.analysis.headline}</strong>
+      <p>{analysis.analysis.detail}</p>
     </AnalysisContainer>
   );
 };
