@@ -31,6 +31,8 @@ import Loader from "components/common/Loader";
 import COLORS from "constants/colors";
 import { convertDateTime } from "utils";
 import { ALL_CHATS_URL } from "constants/urls";
+import Footer from "./Footer";
+import { ReactComponent as SIcon } from "assets/icons/s.svg";
 
 const ChatDetail = () => {
   const { Content, Sider } = Layout;
@@ -38,6 +40,7 @@ const ChatDetail = () => {
   const [data, setData] = useState(null);
   const [rack, setRack] = useState("summary");
   const [loading, setLoading] = useState(true);
+  const [stats,] = useState({});
   const navigate = useNavigate();
 
   const racks = {
@@ -188,7 +191,11 @@ const ChatDetail = () => {
               overflow: "auto"
             }}
           >
-            <ActiveRack data={data[rack]} unique_uuid={unique_uuid} />
+            <div id="content">
+              <div id="icon"><SIcon /></div>
+              <div id="detail"><ActiveRack data={data[rack]} unique_uuid={unique_uuid} /></div>
+              <div id="footer"><Footer stats={stats}/></div>
+            </div>
           </Content>
         </Layout>
       </ChatDetailContentContainer>

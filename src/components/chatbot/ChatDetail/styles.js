@@ -56,4 +56,26 @@ export const ChatDetailContentContainer = styled.aside`
   grid-area: main;
   background-color: #f5f5f5;
   border-radius: 0 0 10px 0;
+
+  #content {
+    display: grid;
+    grid-template-areas:
+    "icon detail"
+    "icon footer";
+    grid-template-rows: auto auto;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+
+    #icon {
+      grid-area: icon;
+    }
+    #detail {
+      grid-area: detail;
+      padding-top: 5px;
+    }
+    #footer {
+      grid-area: footer;
+      margin-top: 2rem;
+    }
+  }
 `;

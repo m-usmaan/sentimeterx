@@ -2,12 +2,6 @@ import COLORS from "constants/colors";
 import styled from "styled-components";
 
 export const SummaryContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 20px;
-`;
-
-export const SummaryDetailContainer = styled.div`
   display: flex;
   align-items: start;
   gap: 20px;
