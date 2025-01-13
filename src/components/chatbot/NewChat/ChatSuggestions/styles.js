@@ -7,21 +7,6 @@ export const SuggestionsContainer = styled.div`
   flex-direction: column;
 `;
 
-export const WelcomeContainer = styled.div`
-  h1 {
-    background: linear-gradient(90deg, #62A5E5, ${COLORS.DARK_BLUE});
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 48px;
-    margin: 0;
-  }
-  h2 {
-    margin: 0;
-    color: #CECECE;
-    font-weight: 600;
-  }
-`;
-
 export const SuggestionsCards = styled.div`
   display: flex;
   flex-wrap: wrap;

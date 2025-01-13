@@ -1,12 +1,10 @@
 import { Spin } from "antd";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
   SuggestionsContainer,
-  WelcomeContainer,
   SuggestionsCards,
   SuggestionCard,
   SuggestionIcon,
@@ -18,7 +16,7 @@ import { chatSuggestions, createChat } from "components/chatbot/apis";
 
 function ChatSuggestions() {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user.user);
+  
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
 
@@ -52,10 +50,6 @@ function ChatSuggestions() {
 
   return (
     <SuggestionsContainer>
-      <WelcomeContainer>
-        <h1>Hello, {user.last_name}</h1>
-        <h2>How can I help you today?</h2>
-      </WelcomeContainer>
       {loading ? (
         <Spin />
       ) : (
