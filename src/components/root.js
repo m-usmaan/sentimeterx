@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from 'components/common/Sidebar';
 import Topbar from "./common/Topbar";
 import { layoutStyle, contentStyle, headerStyles } from "./styles";
@@ -14,7 +15,7 @@ function MainContent() {
       </Sider>
       <Layout>
         <Header style={headerStyles}><Topbar /></Header>
-        <Content style={contentStyle}>Content</Content>
+        <Content style={contentStyle}><Outlet /></Content>
       </Layout>
     </Layout>
   );
