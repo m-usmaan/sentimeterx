@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 import {
   SuggestionsContainer,
-  SuggestionsCards,
   SuggestionCard,
   SuggestionIcon,
   SuggestionContent,
@@ -16,7 +15,7 @@ import { chatSuggestions, createChat } from "components/chatbot/apis";
 
 function ChatSuggestions() {
   const navigate = useNavigate();
-  
+
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
 
@@ -49,30 +48,28 @@ function ChatSuggestions() {
   };
 
   return (
-    <SuggestionsContainer>
+    <SuggestionsContainer wrap gap={20} align="center" justify="space-around">
       {loading ? (
-        <Spin />
+        <Spin style={{ margin: "auto" }} />
       ) : (
-        <SuggestionsCards>
-          {suggestions.map((suggestion) => (
-            <SuggestionCard
-              key={suggestion.id}
-              onClick={() => handleCreate(suggestion.text)}
-            >
-              <SuggestionIcon
-                loading="lazy"
-                src={suggestion.icon}
-                alt={suggestion.category}
-              />
-              <SuggestionContent>
-                <SuggestionTitle style={{ color: suggestion.color }}>
-                  {suggestion.label}
-                </SuggestionTitle>
-                <SuggestionText>{suggestion.text}</SuggestionText>
-              </SuggestionContent>
-            </SuggestionCard>
-          ))}
-        </SuggestionsCards>
+        suggestions.map((suggestion) => (
+          <SuggestionCard
+            key={suggestion.id}
+            onClick={() => handleCreate(suggestion.text)}
+          >
+            <SuggestionIcon
+              loading="lazy"
+              src={suggestion.icon}
+              alt={suggestion.category}
+            />
+            <SuggestionContent>
+              <SuggestionTitle style={{ color: suggestion.color }}>
+                {suggestion.label}
+              </SuggestionTitle>
+              <SuggestionText>{suggestion.text}</SuggestionText>
+            </SuggestionContent>
+          </SuggestionCard>
+        ))
       )}
     </SuggestionsContainer>
   );

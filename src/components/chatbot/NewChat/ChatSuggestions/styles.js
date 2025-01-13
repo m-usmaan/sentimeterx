@@ -1,27 +1,26 @@
-import styled from 'styled-components';
-import COLORS from 'constants/colors';
+import styled from "styled-components";
+import { Flex } from "antd";
 
-export const SuggestionsContainer = styled.div`
-  max-height: 90%;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const SuggestionsCards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 2% 0;
+export const SuggestionsContainer = styled(Flex)`
+  padding: 4% 0;
 `;
 
 export const SuggestionCard = styled.div`
-  max-width: 40%;
-  min-width: 40%;
+  width: 40%;
+  height: 150px;
   border-radius: 6px;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.25);
   padding: 3%;
   display: flex;
   cursor: pointer;
+  transition: 0.5s ease;
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    z-index: 1;
+  }
 `;
 
 export const SuggestionIcon = styled.img`
@@ -53,13 +52,4 @@ export const SuggestionText = styled.p`
   font-size: 19px;
   line-height: 28px;
   margin: 9px 0 0;
-`;
-
-export const Note = styled.div`
-  color: ${COLORS.GRAY};
-
-  a {
-    color: #62A5E5;
-    font-weight: 600;
-  }
 `;
