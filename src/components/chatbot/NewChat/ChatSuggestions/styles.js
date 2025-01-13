@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Flex } from "antd";
 
 export const SuggestionsContainer = styled(Flex)`
-  padding: 4% 0;
+  ${'' /* TODO: Add scrollbar if boxes exceed */}
 `;
 
 export const SuggestionCard = styled.div`
