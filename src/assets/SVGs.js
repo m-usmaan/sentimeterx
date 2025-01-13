@@ -116,8 +116,6 @@ export const AddIcon = ({ fillColor = COLORS.SKY_BLUE_DARKER }) => (
 
 export const SentimeterIcon = ({ fillColor = COLORS.WHITE }) => (
   <svg
-    width="122"
-    height="36"
     viewBox="0 0 122 36"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -206,8 +204,6 @@ export const ArrowDownIcon = ({ fillColor = COLORS.WHITE }) => (
 
 export const AvatarIcon = ({ fillColor = COLORS.SKY_BLUE_DARK }) => (
   <svg
-    width="60"
-    height="60"
     viewBox="0 0 60 60"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
