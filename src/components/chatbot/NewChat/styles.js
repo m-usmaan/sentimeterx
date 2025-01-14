@@ -3,11 +3,12 @@ import COLORS from "constants/colors";
 
 export const Container = styled.div`
   width: 80%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100%;
-  padding: 3% 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1% 0;
   margin: auto;
+  height: 100%;
 `;
 
 export const WelcomeContainer = styled.div`

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { Flex } from "antd";
 
 export const SuggestionsContainer = styled(Flex)`
-  ${'' /* TODO: Add scrollbar if boxes exceed */}
+  padding: 1rem;
+  gap: 1rem;
+  overflow: auto;
 `;
 
 export const SuggestionCard = styled.div`
@@ -14,12 +16,12 @@ export const SuggestionCard = styled.div`
   display: flex;
   cursor: pointer;
   transition: 0.5s ease;
+  flex-grow: 1;
   &:hover {
     transform: scale(1.01);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
       rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
       rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    z-index: 1;
   }
 `;
 

@@ -48,30 +48,32 @@ function ChatSuggestions() {
   };
 
   return (
-    <SuggestionsContainer wrap gap={20} align="center" justify="space-around">
-      {loading ? (
-        <Spin style={{ margin: "auto" }} />
-      ) : (
-        suggestions.map((suggestion) => (
-          <SuggestionCard
-            key={suggestion.id}
-            onClick={() => handleCreate(suggestion.text)}
-          >
-            <SuggestionIcon
-              loading="lazy"
-              src={suggestion.icon}
-              alt={suggestion.category}
-            />
-            <SuggestionContent>
-              <SuggestionTitle style={{ color: suggestion.color }}>
-                {suggestion.label}
-              </SuggestionTitle>
-              <SuggestionText>{suggestion.text}</SuggestionText>
-            </SuggestionContent>
-          </SuggestionCard>
-        ))
-      )}
-    </SuggestionsContainer>
+    <div style={{flexGrow: 1, display: "flex", flexDirection: "column", overflow: "hidden"}}>
+      <SuggestionsContainer wrap>
+        {loading ? (
+          <Spin style={{ margin: "auto" }} />
+        ) : (
+          suggestions.map((suggestion) => (
+            <SuggestionCard
+              key={suggestion.id}
+              onClick={() => handleCreate(suggestion.text)}
+            >
+              <SuggestionIcon
+                loading="lazy"
+                src={suggestion.icon}
+                alt={suggestion.category}
+              />
+              <SuggestionContent>
+                <SuggestionTitle style={{ color: suggestion.color }}>
+                  {suggestion.label}
+                </SuggestionTitle>
+                <SuggestionText>{suggestion.text}</SuggestionText>
+              </SuggestionContent>
+            </SuggestionCard>
+          ))
+        )}
+      </SuggestionsContainer>
+    </div>
   );
 }
 
