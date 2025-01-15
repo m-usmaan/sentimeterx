@@ -8,7 +8,7 @@ import {
 } from "./styles";
 import { fetchChatSummary } from "components/chatbot/apis";
 
-const ChatSummary = ({ data, unique_uuid }) => {
+const ChatSummary = ({ data, unique_uuid, setStats }) => {
   const [summary, setSummary] = useState(data);
   const [loading, setLoading] = useState(false);
 
@@ -17,6 +17,10 @@ const ChatSummary = ({ data, unique_uuid }) => {
     await fetchChatSummary(unique_uuid)
       .then((response) => {
         setSummary(response.data.summary);
+        setStats({
+          comments: response.data.Comments,
+          datasets: response.data.Datasets
+        })
       })
       .catch((error) => {
         toast.error(`${error.response.status}: ${error.response.statusText}`);
@@ -29,6 +33,11 @@ const ChatSummary = ({ data, unique_uuid }) => {
   useEffect(() => {
     if (!summary) {
       populateData();
+    } else {
+      setStats({
+        comments: summary.Comments,
+        datasets: summary.Datasets
+      })
     }
     /* eslint-disable-next-line */
   }, []);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Footer from "../Footer";
 import { Content } from "./styles";
@@ -8,9 +8,7 @@ import ChatSummary from "../Summary";
 import ChatVisualization from "../Visualization";
 import { ReactComponent as SIcon } from "assets/icons/s.svg";
 
-const TabContent = ({ data, unique_uuid, rack }) => {
-  const [stats] = useState({});
-
+const TabContent = ({ data, unique_uuid, rack, stats, setStats }) => {
   const racks = {
     summary: ChatSummary,
     detailed_analysis: ChatAnalysis,
@@ -25,7 +23,7 @@ const TabContent = ({ data, unique_uuid, rack }) => {
         <SIcon />
       </div>
       <div id="detail">
-        <ActiveRack data={data[rack]} unique_uuid={unique_uuid} />
+        <ActiveRack data={data[rack]} unique_uuid={unique_uuid} setStats={setStats} />
       </div>
       <div id="footer">
         <Footer stats={stats} />

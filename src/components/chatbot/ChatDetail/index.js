@@ -33,6 +33,7 @@ const ChatDetail = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [stats, setStats] = useState({});
 
   const pinnedIconOptions = {
     borderColor: COLORS.DARK_BLUE,
@@ -165,6 +166,8 @@ const ChatDetail = () => {
                   data={data}
                   unique_uuid={unique_uuid}
                   rack={item.key}
+                  stats={stats}
+                  setStats={setStats}
                 />
               ),
             }))}
