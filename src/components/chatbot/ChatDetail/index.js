@@ -169,7 +169,7 @@ const ChatDetail = () => {
               ),
             }))}
             tabPosition="left"
-            style={{ padding: "2rem" }}
+            style={{ padding: "2rem 0" }}
           />
         </ConfigProvider>
       </ChatDetailContentContainer>
