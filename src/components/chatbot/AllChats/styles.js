@@ -6,6 +6,8 @@ export const AllChatsContainer = styled.section`
   min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
+  padding: 2%;
+  background-color: ${COLORS.WHITE};
 `;
 
 export const FiltersContainer = styled.div`

@@ -10,6 +10,8 @@ export const ChatDetailContainer = styled.div`
     "main main";
   grid-template-rows: auto auto 1fr;
   height: 100%;
+  padding: 4%;
+  background-color: ${COLORS.WHITE};
 `;
 
 export const NavigationHeaderContainer = styled.header`
