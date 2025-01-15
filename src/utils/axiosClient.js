@@ -1,6 +1,10 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import { buildQueryString, getToken } from "utils";
+import { logout } from "features/users/userSlice";
 
 const axiosClient = axios.create();
 
@@ -11,17 +15,50 @@ axiosClient.defaults.headers = {
   Accept: "application/json",
 };
 
-axiosClient.interceptors.request.use(
-  (request) => {
-    const authToken = getToken();
-    if (authToken && shouldAddAuthHeader(request.url)) {
-      request.headers.Authorization = `Token ${authToken}`;
-    }
-    return request;
-  },
-  (error) => Promise.reject(error)
-);
-// TODO: Check if response is 401 on any request, then unauth user from app and navigate to login (Response interceptor)
+export const AxiosInterceptor = ({ children }) => {
+  const dispatch = useDispatch();
+  const [isSet, setIsSet] = useState(false);
+
+  useEffect(() => {
+    const reqInterceptor = (request) => {
+      const authToken = getToken();
+      if (authToken && shouldAddAuthHeader(request.url)) {
+        request.headers.Authorization = `Token ${authToken}`;
+      }
+      return request;
+    };
+
+    const resInterceptor = (response) => {
+      return response;
+    };
+
+    const errInterceptor = (error) => {
+      if (error.response.status === 401) {
+        toast.error("Session expired. Please login again.");
+        dispatch(logout());
+      }
+      return Promise.reject(error);
+    };
+
+    const requestInterceptors = axiosClient.interceptors.request.use(
+      reqInterceptor,
+      errInterceptor
+    );
+    const responseInterceptors = axiosClient.interceptors.response.use(
+      resInterceptor,
+      errInterceptor
+    );
+
+    setIsSet(true);
+
+    return () => {
+      axiosClient.interceptors.request.eject(requestInterceptors);
+      axiosClient.interceptors.response.eject(responseInterceptors);
+    };
+  }, [dispatch]);
+
+  return isSet && children;
+};
 
 export function getRequest(url, queryParams = {}, options = {}) {
   let params = buildQueryString(queryParams);

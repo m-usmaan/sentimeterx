@@ -1,3 +1,4 @@
+import { AxiosInterceptor } from "utils/axiosClient";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -17,7 +18,11 @@ import ROUTES from "constants/routes";
 const router = createBrowserRouter([
   {
     path: HOME_URL,
-    element: <App />,
+    element: (
+      <AxiosInterceptor>
+        <App />
+      </AxiosInterceptor>
+    ),
     errorElement: <ErrorPage />,
     children: ROUTES.map(({ path, element }) => ({ path, element })),
   },
