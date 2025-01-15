@@ -1,40 +1,48 @@
 import React, { useEffect, useState } from "react";
+import COLORS from "constants/colors";
 import { toast } from "react-toastify";
 import {
   InputContainer,
   InputHeader,
   DatasetInfo,
   Label,
-  ChangeButton,
-  DatasetDropdownContainer,
-  Legend,
-  DropdownContainer,
-  Dropdown,
-  DropdownItem,
-  ClearButtonContainer,
   FilterInfo,
-  FilterIndicator,
+  FiltersContainer,
 } from "./styles";
-import { dataSets } from "components/chatbot/apis";
+import { fetchAllDataSets, fetchDataSetFilters } from "components/chatbot/apis";
+import { Select, Button, DatePicker, ConfigProvider, List, Tabs } from "antd";
+import { FilterFilled, SyncOutlined, DownOutlined } from "@ant-design/icons";
+
+const { RangePicker } = DatePicker;
+const initialFilters = [
+  {
+    key: "date",
+    label: "Date",
+    children: <RangePicker />,
+  },
+];
 
 const InputBox = () => {
-  const [_dataSets, setDataSets] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [displayDropdown, setDisplayDropdown] = useState(false);
+  const [dataSets, setDataSets] = useState([]);
+  const [selectedDatasets, setSelectedDatasets] = useState([]);
+  const [datasetsLoading, setDatasetsLoading] = useState(false);
 
+  const [datasetFilters, setDatasetFilters] = useState(initialFilters);
+  const [filtersLoading, setFiltersLoading] = useState(false);
+
+  const [visible, setVisible] = useState(false);
 
   const populateData = async () => {
-    setLoading(true);
-    await dataSets()
+    setDatasetsLoading(true);
+    await fetchAllDataSets()
       .then((response) => {
-        console.log(response);
         setDataSets(response.data);
       })
       .catch((error) => {
         toast.error(`${error.response.status}: ${error.response.statusText}`);
       })
       .finally(() => {
-        setLoading(false);
+        setDatasetsLoading(false);
       });
   };
 
@@ -42,51 +50,102 @@ const InputBox = () => {
     populateData();
   }, []);
 
+  const handleDatasetChange = async (values) => {
+    setSelectedDatasets(values);
+    if (values.length === 1) {
+      setFiltersLoading(true);
+      await fetchDataSetFilters(values[0])
+        .then((response) => {
+          const filters = Object.entries(response.data[0]).map(
+            ([key, values]) => ({
+              key,
+              label: key,
+              children: (
+                <List
+                  size="small"
+                  bordered
+                  dataSource={values}
+                  renderItem={(item) => <List.Item>{item}</List.Item>}
+                />
+              ),
+            })
+          );
+          setDatasetFilters(initialFilters.concat(filters));
+        })
+        .catch((error) => {
+          toast.error(`${error.response.status}: ${error.response.statusText}`);
+        })
+        .finally(() => {
+          setFiltersLoading(false);
+        });
+    } else {
+      setDatasetFilters([]);
+    }
+  };
+
   return (
     <InputContainer onSubmit={(e) => e.preventDefault()}>
       <InputHeader>
-        <DatasetInfo>
-          <Label>
-            <strong>Data Sets</strong>
-          </Label>
-          <ChangeButton
-            onClick={() => setDisplayDropdown((display) => !display)}
-            disabled={loading}
-          >
-            Change
-          </ChangeButton>
-          <DatasetDropdownContainer
-            display={displayDropdown ? "inline" : "none"}
-          >
-            <Legend>Select Source</Legend>
-            <DropdownContainer>
-              <Dropdown>
-                {_dataSets.map((dataSet) => {
-                  return (
-                    <DropdownItem key={dataSet.id}>
-                      <input
-                        type="checkbox"
-                        id={dataSet.id}
-                        name="dataset"
-                        value={dataSet.id}
-                        className="custom-checkbox"
-                      />
-                      <label htmlFor={dataSet.id}>{dataSet.title}</label>
-                    </DropdownItem>
-                  );
-                })}
-              </Dropdown>
-            </DropdownContainer>
-            <ClearButtonContainer>
-              <button>Clear Selection</button>
-            </ClearButtonContainer>
-          </DatasetDropdownContainer>
+        <DatasetInfo align="center">
+          <Select
+            mode="multiple"
+            allowClear
+            style={{ width: "100%" }}
+            placeholder="Datasets..."
+            options={dataSets.map((dataset) => ({
+              label: dataset.title,
+              value: dataset.id,
+            }))}
+            disabled={datasetsLoading}
+            size="large"
+            maxTagCount="responsive"
+            placement="topRight"
+            onChange={handleDatasetChange}
+            suffixIcon={
+              datasetsLoading ? <SyncOutlined spin /> : <DownOutlined />
+            }
+          />
         </DatasetInfo>
-        <FilterInfo>
+        <FilterInfo gap={15} align="center">
           <Label>
             <strong>Filters:</strong>
           </Label>
-          <FilterIndicator />
+          <Button
+            onClick={() => setVisible(!visible)}
+            icon={filtersLoading ? <SyncOutlined spin /> : <FilterFilled />}
+            disabled={selectedDatasets.length !== 1 || filtersLoading}
+          >
+            All
+          </Button>
+          <FiltersContainer style={{ display: visible ? "" : "none" }}>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Tabs: {
+                    inkBarColor: COLORS.DARK_BLUE,
+                    itemSelectedColor: COLORS.DARK_BLUE,
+                    itemHoverColor: COLORS.DARK_BLUE,
+                    itemColor: COLORS.LIGHT_GRAY,
+                    itemActiveColor: COLORS.DARK_BLUE,
+                    horizontalItemPadding: "12px",
+                    horizontalMargin: 0,
+                  },
+                },
+                token: {
+                  borderRadius: "5px",
+                },
+              }}
+            >
+              <Tabs
+                defaultActiveKey="1"
+                items={datasetFilters}
+                tabBarStyle={{
+                  backgroundColor: COLORS.WHITE,
+                  borderBottom: `1px solid ${COLORS.LIGHTER_GRAY}`,
+                }}
+              />
+            </ConfigProvider>
+          </FiltersContainer>
         </FilterInfo>
       </InputHeader>
     </InputContainer>

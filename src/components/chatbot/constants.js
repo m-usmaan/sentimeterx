@@ -8,4 +8,5 @@ export const CHAT_FEEDBACK_QUOTES_API_URL = (unique_uuid) => `/chats/${unique_uu
 export const CHAT_DETAIL_API_URL = (unique_uuid) => `/chats/${unique_uuid}/`;
 export const CHAT_SUMMARY_API_URL = (unique_uuid) => `/chats/${unique_uuid}/summary/`;
 export const CHAT_VISUALIZATION_API_URL = (unique_uuid) => `/chats/${unique_uuid}/visualization/`;
+export const DATASET_FILTERS_API_URL = (dataset_id) => `${DATASETS_API_URL}${dataset_id}/filters/`;
 export const PIN_CHAT_API_URL = (unique_uuid) => `${CHAT_DETAIL_API_URL(unique_uuid)}toggle-pinned/`;
