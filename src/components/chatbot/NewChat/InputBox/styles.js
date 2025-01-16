@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import COLORS from "constants/colors";
-import { Flex } from "antd";
+import { Flex, Tabs as AntdTabs } from "antd";
 
 export const InputContainer = styled.form`
   border-radius: 9px;
@@ -33,5 +33,8 @@ export const FiltersContainer = styled.div`
   position: absolute;
   bottom: 50px;
   width: 100%;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.25);
+  height: 300px;
+  overflow: hidden;
 `;
+
+export const Tabs = styled(AntdTabs)``;

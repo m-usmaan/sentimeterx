@@ -8,9 +8,10 @@ import {
   Label,
   FilterInfo,
   FiltersContainer,
+  Tabs
 } from "./styles";
 import { fetchAllDataSets, fetchDataSetFilters } from "components/chatbot/apis";
-import { Select, Button, DatePicker, ConfigProvider, List, Tabs } from "antd";
+import { Select, Button, DatePicker, ConfigProvider, List } from "antd";
 import { FilterFilled, SyncOutlined, DownOutlined } from "@ant-design/icons";
 
 const { RangePicker } = DatePicker;
@@ -66,6 +67,7 @@ const InputBox = () => {
                   bordered
                   dataSource={values}
                   renderItem={(item) => <List.Item>{item}</List.Item>}
+                  style={{backgroundColor: COLORS.WHITE}}
                 />
               ),
             })
@@ -130,10 +132,7 @@ const InputBox = () => {
                     horizontalItemPadding: "12px",
                     horizontalMargin: 0,
                   },
-                },
-                token: {
-                  borderRadius: "5px",
-                },
+                }
               }}
             >
               <Tabs
