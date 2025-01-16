@@ -46,6 +46,7 @@ function ChatSuggestions() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [creating, setCreating] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
 
   const populateData = async () => {
@@ -67,13 +68,29 @@ function ChatSuggestions() {
   }, []);
 
   const handleCreate = async (user_query) => {
+    const toastId = toast.loading("Creating chat...");
+    setCreating(true);
     await createChat({ user_query })
       .then((response) => {
+        toast.update(toastId, {
+          render: "Chat created successfully!",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
         navigate(`/chats/${response.data.unique_uuid}`);
       })
-      .catch((error) =>
-        toast.error(`${error.response.status}: ${error.response.statusText}`)
-      );
+      .catch((error) => {
+        toast.update(toastId, {
+          render: `${error.response.status}: ${error.response.statusText}`,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
+      })
+      .finally(() => {
+        setCreating(false);
+      });
   };
 
   return (
@@ -96,6 +113,7 @@ function ChatSuggestions() {
               <SuggestionCard
                 key={suggestion.id}
                 onClick={() => handleCreate(suggestion.text)}
+                className={creating ? "disabled" : ""}
               >
                 <SuggestionIcon
                   loading="lazy"

@@ -5,6 +5,11 @@ export const SuggestionsContainer = styled(Flex)`
   padding: 1rem;
   gap: 1rem;
   overflow: auto;
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 `;
 
 export const SuggestionCard = styled.div`
