@@ -2,10 +2,7 @@ import { Empty, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import {
-  ComparisonGraph,
-  SummaryContainer,
-} from "./styles";
+import { ComparisonGraph, SummaryContainer } from "./styles";
 import { fetchChatSummary } from "components/chatbot/apis";
 
 const ChatSummary = ({ data, unique_uuid, setStats }) => {
@@ -16,11 +13,12 @@ const ChatSummary = ({ data, unique_uuid, setStats }) => {
     setLoading(true);
     await fetchChatSummary(unique_uuid)
       .then((response) => {
-        setSummary(response.data.summary);
+        const respData = response.data.summary;
+        setSummary(respData);
         setStats({
-          comments: response.data.Comments,
-          datasets: response.data.Datasets
-        })
+          comments: respData.Comments,
+          datasets: respData.Datasets,
+        });
       })
       .catch((error) => {
         toast.error(`${error.response.status}: ${error.response.statusText}`);
@@ -36,8 +34,8 @@ const ChatSummary = ({ data, unique_uuid, setStats }) => {
     } else {
       setStats({
         comments: summary.Comments,
-        datasets: summary.Datasets
-      })
+        datasets: summary.Datasets,
+      });
     }
     /* eslint-disable-next-line */
   }, []);
