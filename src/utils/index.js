@@ -1,7 +1,5 @@
 export const EXTRACT_ORGANIZATION_SLUG = () => {
-  return process.env.REACT_APP_ENV === "local"
-    ? process.env.REACT_APP_ORGANIZATION_SLUG
-    : window.location.hostname.split(".")[0];
+  return process.env.REACT_APP_ORGANIZATION_SLUG;
 };
 
 export const convertDateTime = (dateObject, dateOptions, ago = false) => {
@@ -50,12 +48,12 @@ export const buildQueryString = (params) => {
 
 export const getToken = () => {
   return localStorage.getItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`);
-}
+};
 
 export const setToken = (token) => {
   localStorage.setItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`, token);
-}
+};
 
 export const removeToken = () => {
   localStorage.removeItem(`${EXTRACT_ORGANIZATION_SLUG()}_token`);
-}
+};
