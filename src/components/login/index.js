@@ -8,7 +8,7 @@ import { HOME_URL } from "constants/urls";
 import { loginUser } from "features/users/apis";
 import { login } from "features/users/userSlice";
 import { toast } from "react-toastify";
-import { getToken, removeToken, setToken } from "utils";
+import { getToken, removeToken, setToken, EXTRACT_ORGANIZATION_SLUG } from "utils";
 
 const Login = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -22,7 +22,12 @@ const Login = () => {
   }
 
   const handleSubmit = (values) => {
-    loginUser(values)
+    const loginData = {
+      ...values,
+      organization_slug: EXTRACT_ORGANIZATION_SLUG()
+    };
+    
+    loginUser(loginData)
       .then((response) => {
         setToken(response.data.token); // TODO: Also manage token expiry
         dispatch(login(response.data.user));
