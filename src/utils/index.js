@@ -1,4 +1,13 @@
 export const EXTRACT_ORGANIZATION_SLUG = () => {
+  const hostname = window.location.hostname;
+  const pattern = /^(.+)\.demo\.sentimeter\.io$/;
+  const match = hostname.match(pattern);
+  
+  if (match && match[1]) {
+    return match[1];
+  }
+  
+  // Fallback to environment variable if URL pattern doesn't match
   return process.env.REACT_APP_ORGANIZATION_SLUG;
 };
 
