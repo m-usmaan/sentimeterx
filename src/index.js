@@ -11,7 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 import store, { persistor } from "./store";
 import ErrorPage from "components/common/ErrorPage";
 import ToastProvider from "components/common/Toast";
-import Login from "components/Login";
+import Login from "components/login";
 import { HOME_URL } from "constants/urls";
 import ROUTES from "constants/routes";
 

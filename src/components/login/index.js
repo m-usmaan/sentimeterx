@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 
-import LoginContainer from "components/Login/styles";
+import LoginContainer from "components/login/styles";
 import { HOME_URL } from "constants/urls";
 import { loginUser } from "features/users/apis";
 import { login } from "features/users/userSlice";

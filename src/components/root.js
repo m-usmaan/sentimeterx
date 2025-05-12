@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from 'components/common/Sidebar';
+import Sidebar from 'components/common/sidebar';
 import Topbar from "./common/Topbar";
 import { layoutStyle, contentStyle, headerStyles } from "./styles";
 
