@@ -9,7 +9,7 @@ import {
   newChatButtonStyle,
   topContainerStyles,
   MenuContainer,
-} from "./styles";
+} from "components/common/sidebar/styles";
 import { PlusOutlined } from "@ant-design/icons";
 import { HOME_URL } from "constants/urls";
 import { useNavigate } from "react-router-dom";
